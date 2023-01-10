@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { DataTypes } = require('sequelize');
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
 
 // Create a new Sequelize model for books
 class Product extends Model { }

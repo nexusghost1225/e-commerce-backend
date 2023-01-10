@@ -1,41 +1,37 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
+const ProductTag = require('./product');
 
 // Create a new Sequelize model for books
-class Book extends Model {}
+class ProductTag extends Model {}
 
-Book.init(
+ProductTag.init(
   // Define fields/columns on model
   // An `id` is automatically created by Sequelize, though best practice would be to define the primary key ourselves
   {
     title: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     },
-    author: {
-      type: DataTypes.STRING
+    product_id: {
+      type: DataTypes.INTEGER,
+      references:("./Product")
     },
-    isbn: {
-      type: DataTypes.STRING
+    tag_id: {
+      type: DataTypes.INTEGER,
+      references:("./tag")
     },
-    pages: {
-      type: DataTypes.INTEGER
-    },
-    edition: {
-      type: DataTypes.INTEGER
-    },
-    // Will become `is_paperback` in table due to `underscored` flag
-    isPaperback: {
-      type: DataTypes.BOOLEAN
-    }
-  },
+  }
   {
     // Link to database connection
     sequelize,
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     underscored: true,
-    modelName: 'book'
+    modelName: 'ProductTag'
   }
 );
 
-module.exports = Book;
+module.exports = ProductTag;
